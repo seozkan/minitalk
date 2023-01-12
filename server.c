@@ -24,7 +24,7 @@ void	handler(int sig)
 	i++;
 	if (i == 8)
 	{
-		ft_putchar_fd(c, 1);
+		ft_putchar(c);
 		i = 0;
 		c = 0;
 	}
@@ -35,9 +35,9 @@ int	main(void)
 	int	pid;
 
 	pid = getpid();
-	write(1, "Server started - pid ", 22);
-	ft_putnbr_fd(pid, 1);
-	write(1, ". \n", 4);
+	ft_putstr("SERVER : Server started\nPID -> ");
+	ft_putnbr(pid);
+	ft_putstr("\n");
 	signal(SIGUSR1, handler);
 	signal(SIGUSR2, handler);
 	while (1)

@@ -25,7 +25,7 @@ void	handler(int sig, siginfo_t *info, void *ptr)
 	i++;
 	if (i == 8)
 	{
-		ft_putchar_fd(c, 1);
+		ft_putchar(c);
 		if (!c)
 		{
 			usleep(300);
@@ -42,9 +42,9 @@ int	main(void)
 	struct sigaction	sa;
 
 	pid = getpid();
-	write(1, "Server started - pid ", 22);
-	ft_putnbr_fd(pid, 1);
-	write(1, ". \n", 4);
+	ft_putstr("SERVER : Server started\nPID -> ");
+	ft_putnbr(pid);
+	ft_putstr("\n");
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = handler;
 	sigaction(SIGUSR1, &sa, NULL);

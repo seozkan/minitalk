@@ -14,13 +14,12 @@
 
 int	g_len;
 
-void	ft_received(int sig)
+void	ft_transmit(int sig)
 {
 	if (sig == SIGUSR1)
 	{
-		write(1, "SERVER : Received  ", 20);
-		ft_putnbr_fd(g_len, 1);
-		write(1, " character. \n", 14);
+		ft_putnbr(g_len);
+		ft_putstr(" characters successfully transmitted.\n");
 	}
 	exit (1);
 }
@@ -40,27 +39,32 @@ void	send_data(char c, int pid)
 		else
 			j = kill(pid, SIGUSR2);
 		i++;
-		usleep(150);
+		usleep(300);
 	}
-	ft_error("", j);
+	if (j == -1)
+	{
+		ft_putstr("CLIENT : PID Error!\nPlease enter the correct PID.\n");
+		exit(1);
+	}
 }
 
 int	main(int ac, char **av)
 {
-	int	a;
+	int	pid;
 	int	i;
 
 	i = 0;
 	if (ac == 3)
 	{
-		a = ft_atoi(av[1]);
+		pid = ft_atoi(av[1]);
 		while (av[2][i])
-			send_data(av[2][i++], a);
+			send_data(av[2][i++], pid);
+		send_data('\0', pid);
 		g_len = i;
-		signal(SIGUSR1, ft_received);
+		signal(SIGUSR1, ft_transmit);
 		while (1)
 			pause();
 	}
 	else
-		write(1, "Error : Format ./client <server_pid> <message>\n", 48);
+		ft_putstr("CLIENT : FORMAT Error!\nPlease send as ./client <PID> <MESSAGE>\n");
 }

@@ -12,42 +12,32 @@
 
 #include "minitalk.h"
 
-void	ft_error(const char *str, int flag)
+void	ft_putchar(char c)
 {
+	write(1, &c, 1);
+}
+
+void	ft_putstr(char *str)
+{
+	if (!str)
+		return (ft_putstr("(null)"));
 	while (*str)
-	{
-		if (*str != 32)
-		{
-			write(1, "Error : Enter correct pid \n", 28);
-			exit (1);
-		}
-		str++;
-	}
-	if (flag == -1)
-	{
-		write(1, "Error : Enter correct pid \n", 28);
-		exit (1);
-	}
+		ft_putchar(*str++);
 }
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr(int n)
 {
 	unsigned int	num;
 
 	num = n;
 	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putchar('-');
 		num = -n;
 	}
 	if (num >= 10)
-		ft_putnbr_fd(num / 10, fd);
-	ft_putchar_fd(num % 10 + '0', fd);
+		ft_putnbr(num / 10);
+	ft_putchar(num % 10 + '0');
 }
 
 int	ft_atoi(const char *str)
@@ -65,6 +55,5 @@ int	ft_atoi(const char *str)
 		sum = sum * 10 + (*str - '0');
 		str++;
 	}
-	ft_error(str, 0);
 	return (sum * sign);
 }
