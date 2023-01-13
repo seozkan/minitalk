@@ -27,21 +27,21 @@ void	ft_transmit(int sig)
 void	send_data(char c, int pid)
 {
 	int	i;
-	int	j;
+	int	err;
 
 	i = 0;
-	j = 0;
+	err = 0;
 	(void)pid;
 	while (i < 8)
 	{
 		if (c << i & 0b10000000)
-			j = kill(pid, SIGUSR1);
+			err = kill(pid, SIGUSR1);
 		else
-			j = kill(pid, SIGUSR2);
+			err = kill(pid, SIGUSR2);
 		i++;
-		usleep(300);
+		usleep(400);
 	}
-	if (j == -1)
+	if (err == -1)
 	{
 		ft_putstr("CLIENT : PID Error!\nPlease enter the correct PID.\n");
 		exit(1);

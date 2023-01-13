@@ -19,25 +19,23 @@ void	ft_putchar(char c)
 
 void	ft_putstr(char *str)
 {
-	if (!str)
-		return (ft_putstr("(null)"));
 	while (*str)
 		ft_putchar(*str++);
 }
 
 void	ft_putnbr(int n)
 {
-	unsigned int	num;
+	unsigned int	nbr;
 
-	num = n;
+	nbr = n;
 	if (n < 0)
 	{
 		ft_putchar('-');
-		num = -n;
+		nbr = -n;
 	}
-	if (num >= 10)
-		ft_putnbr(num / 10);
-	ft_putchar(num % 10 + '0');
+	if (nbr >= 10)
+		ft_putnbr(nbr / 10);
+	ft_putchar(nbr % 10 + '0');
 }
 
 int	ft_atoi(const char *str)

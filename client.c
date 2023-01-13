@@ -15,20 +15,20 @@
 void	send_data(char c, int pid)
 {
 	int	i;
-	int	j;
+	int	err;
 
 	i = 0;
-	j = 0;
+	err = 0;
 	while (i < 8)
 	{
 		if (c << i & 0b10000000)
-			j = kill(pid, SIGUSR1);
+			err = kill(pid, SIGUSR1);
 		else
-			j = kill(pid, SIGUSR2);
+			err = kill(pid, SIGUSR2);
 		i++;
-		usleep(300);
+		usleep(400);
 	}
-	if (j == -1)
+	if (err == -1)
 	{
 		ft_putstr("CLIENT : PID Error!\nPlease enter the correct PID\n");
 		exit(1);
@@ -46,6 +46,7 @@ int	main(int ac, char **av)
 		pid = ft_atoi(av[1]);
 		while (av[2][i])
 			send_data(av[2][i++], pid);
+		send_data('\0', pid);
 	}
 	else
 		ft_putstr("CLIENT : FORMAT Error!\nPlease send as ./client <PID> <MESSAGE>\n");
