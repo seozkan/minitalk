@@ -28,7 +28,7 @@ void	handler(int sig, siginfo_t *info, void *ptr)
 		ft_putchar(c);
 		if (!c)
 		{
-			usleep(300);
+			usleep(400);
 			kill(info->si_pid, SIGUSR1);
 		}
 		i = 0;
