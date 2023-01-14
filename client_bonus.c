@@ -6,13 +6,13 @@
 /*   By: seozkan <seozkan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:57:41 by seozkan           #+#    #+#             */
-/*   Updated: 2023/01/09 20:57:44 by seozkan          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:49:01 by seozkan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-int	g_len;
+int		g_len;
 
 void	ft_transmit(int sig)
 {
@@ -21,7 +21,7 @@ void	ft_transmit(int sig)
 		ft_putnbr(g_len);
 		ft_putstr(" characters successfully transmitted.\n");
 	}
-	exit (1);
+	exit(1);
 }
 
 void	send_data(char c, int pid)
@@ -66,5 +66,5 @@ int	main(int ac, char **av)
 			pause();
 	}
 	else
-		ft_putstr("CLIENT : FORMAT Error!\nPlease send as ./client <PID> <MESSAGE>\n");
+		ft_putstr("CLIENT : FORMAT Error!\nSend as ./client <PID> <MESSAGE>\n");
 }

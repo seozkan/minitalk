@@ -6,7 +6,7 @@
 /*   By: seozkan <seozkan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:57:34 by seozkan           #+#    #+#             */
-/*   Updated: 2023/01/09 20:57:46 by seozkan          ###   ########.fr       */
+/*   Updated: 2023/01/14 14:48:20 by seozkan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	main(int ac, char **av)
 		pid = ft_atoi(av[1]);
 		while (av[2][i])
 			send_data(av[2][i++], pid);
-		send_data('\0', pid);
 	}
 	else
-		ft_putstr("CLIENT : FORMAT Error!\nPlease send as ./client <PID> <MESSAGE>\n");
+		ft_putstr("CLIENT : FORMAT Error!\nSend as ./client <PID> <MESSAGE>\n");
 }
